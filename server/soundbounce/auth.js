@@ -12,16 +12,13 @@ const stateKey = 'spotify_auth_state',
 	spotifyScopes = [
 		'user-read-playback-state',
 		'user-modify-playback-state',
-		'playlist-read-private',
 		'playlist-read-collaborative',
 		'playlist-modify-public',
-		'playlist-modify-private',
 		'user-follow-modify',
 		'user-follow-read',
 		'user-library-read',
 		'user-library-modify',
 		'user-read-private',
-		'user-read-birthdate',
 		'user-read-email',
 		'user-top-read'
 	];

@@ -5,7 +5,7 @@ export default {
 		primary: '#ad009f'
 	},
 	refill: {
-		targetPlaylistSize: {from: 50, to: 75},
+		targetPlaylistSize: {from: 100, to: 150},
 		sources: [
 			{
 				type: 'room-history',
