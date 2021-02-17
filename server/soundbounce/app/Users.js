@@ -27,33 +27,34 @@ export default class Users {
 				email,
 				profile
 			}
-		}).spread((user, created) => {
-			// log to db (but don't wait for this to resolve, lazy write)
+		}).then((user)=> {
 			UserActivity.create({
 				userId: id,
 				type: UserActivities.login
 			});
 
 			// update the access / refresh token in the db
-			user.set('accessToken', accessToken);
-			user.set('refreshToken', refreshToken);
-			user.set('profile', profile);
-			user.set('avatar', avatarUrl);
+			user[0].set('accessToken', accessToken);
+			user[0].set('refreshToken', refreshToken);
+			user[0].set('profile', profile);
+			user[0].set('avatar', avatarUrl);
 
-			return user.save();
+			return user[0].save();
 		});
 	}
 
 	getUsersToSendWithRoomSync(userIds, roomId) {
+
 		// todo: also get room status such as creator, admin based on roomId
 		// currently getting listeners only
 		return User
-			.findAll({where: {id: {$in: userIds}}, attributes: ['id', 'nickname', 'avatar']})
+			.findAll({where: {id: userIds}, attributes: ['id', 'nickname', 'avatar']})
 			.then(users =>
 				users ? users.map(user => ({
 					...user.get({plain: true}),
 					tags: ['listener']
 				})) : []);
+		return []
 	}
 }
 

@@ -16,12 +16,14 @@ export default class Tracks {
 	}
 
 	findTracksInDb(trackIds) {
+		const safeIds = uniq(trackIds)
 		return Track.findAll({
 			where: {
-				id: {$in: trackIds}
+				id: safeIds
 			},
 			include: [Artist]
 		});
+		
 	}
 
 	findInDbOrQuerySpotifyApi(trackIds) {
@@ -62,11 +64,11 @@ export default class Tracks {
 										.value();
 
 									const artistIds = uniq(artists.map(a => a.id));
-
+									
 									// ok see if we have any of these artists in our system already
 									return Artist.findAll({
 										where: {
-											id: {$in: artistIds}
+											id: ['6rqhFgbbKwnb9MLmUQDhG6']
 										},
 										attributes: ['id']
 									}).then(artistsInDb => {
