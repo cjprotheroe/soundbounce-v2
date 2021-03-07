@@ -212,3 +212,8 @@ FakesAssemblies/
 
 # VS Code Settings 
 \.vscode/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
